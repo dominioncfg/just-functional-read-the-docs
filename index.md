@@ -11,7 +11,7 @@ or by using this command in the console:
 ```
 dotnet add package JustFunctional.Core --version 1.0.9
 ```
-You can find the packaget in nuget **![here](https://www.nuget.org/packages/JustFunctional.Core/)** for more details.
+You can find the packaget in nuget **[here](https://www.nuget.org/packages/JustFunctional.Core/)** for more details.
 
 
 ### 2. Usage
