@@ -11,7 +11,8 @@ or by using this command in the console:
 ```
 dotnet add package JustFunctional.Core --version 1.0.9
 ```
-###### You can find the packaget in nuget **![here](https://www.nuget.org/packages/JustFunctional.Core/)** for more details.
+You can find the packaget in nuget **![here](https://www.nuget.org/packages/JustFunctional.Core/)** for more details.
+
 
 ### 2. Usage
 
@@ -29,7 +30,8 @@ decimal result =  f.Evaluate(new EvaluationContext(new Dictionary<string, decima
 
 #### 2.1 Using an IoC Container:
 If you are using an IoC Container we recommend to use the **IFunctionFactory** and that way all of your **Function** instances will share the same configuration:
-1- **Create And Extension Method Like:**
+
+1- **Create and extension method:**
 ```
 using Microsoft.Extensions.Hosting;
 public static class JustFunctionalExtensions
@@ -70,14 +72,14 @@ public class MathController : ControllerBase
     private readonly IFunctionFactory _functionFactory;
     public MathController(IFunctionFactory functionFactory)
     {
-    _functionFactory = functionFactory;
+        _functionFactory = functionFactory;
     }
     [HttpGet]
     public async Task<decimal> Get()
     {
-    string fx = "(X*4)^2";
-    Function f = _functionFactory.Create(fx);
-    return await f.EvaluateAsync(new EvaluationContext(new Dictionary<string, decimal>() { ["X"] = 3 }));
+        string fx = "(X*4)^2";
+        Function f = _functionFactory.Create(fx);
+        return await f.EvaluateAsync(new EvaluationContext(new Dictionary<string, decimal>() { ["X"] = 3 }));
     }
 }
 ```
