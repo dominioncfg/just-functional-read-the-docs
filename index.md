@@ -1,37 +1,84 @@
-## Welcome to GitHub Pages
+## Getting Started
 
-You can use the [editor on GitHub](https://github.com/dominioncfg/just-functional-read-the-docs/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+### 1. Installation
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+You can install the package by adding this reference to the .csproj:
 
-### Markdown
+```
+<PackageReference Include="JustFunctional.Core" Version="1.0.9" />
+```
+or by using this command in the console:
+```
+dotnet add package JustFunctional.Core --version 1.0.9
+```
+###### You can find the packaget in nuget **![here](https://www.nuget.org/packages/JustFunctional.Core/)** for more details.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+### 2. Usage
 
-```markdown
-Syntax highlighted code block
+#### 2.1 Evaluate a function directly:
 
-# Header 1
-## Header 2
-### Header 3
+You can start evaluating with the default configuration using the **Function** class:
 
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```
+string fx = "(X*4)^2";
+Function f = new Function(fx);
+decimal result =  f.Evaluate(new EvaluationContext(new Dictionary<string, decimal>() { ["X"] = 3 }));
+//result = 144
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
 
-### Jekyll Themes
+#### 2.1 Using an IoC Container:
+If you are using an IoC Container we recommend to use the **IFunctionFactory** and that way all of your **Function** instances will share the same configuration:
+1- **Create And Extension Method Like:**
+```
+using Microsoft.Extensions.Hosting;
+public static class JustFunctionalExtensions
+{
+    
+    public static IServiceCollection AddJustFunctional(this IServiceCollection services)
+    {
+        var factory = FunctionFactoryBuilder.ConfigureFactory(options =>
+        {
+            options
+                .WithEvaluationContextVariablesProvider()
+                .WithDefaultsTokenProvider()
+                .WithCompiledEvaluator();
+        });
+        services.AddSingleton<IFunctionFactory>(factory);
+        return services;
+    }
+}
+```
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/dominioncfg/just-functional-read-the-docs/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+2- **Register the factory with the IoC Container:**
+```
+public void ConfigureServices(IServiceCollection services)
+{
+    ...
+    services.AddJustFunctional();
+    ...
+}
+```
 
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+3- **Use in a controller or in any other place:**
+```
+using JustFunctional.Core;
+[ApiController]
+[Route("[controller]")]
+public class MathController : ControllerBase
+{
+    private readonly IFunctionFactory _functionFactory;
+    public MathController(IFunctionFactory functionFactory)
+    {
+    _functionFactory = functionFactory;
+    }
+    [HttpGet]
+    public async Task<decimal> Get()
+    {
+    string fx = "(X*4)^2";
+    Function f = _functionFactory.Create(fx);
+    return await f.EvaluateAsync(new EvaluationContext(new Dictionary<string, decimal>() { ["X"] = 3 }));
+    }
+}
+```
+Note that EvaluateAsync supports Parallel calls without any Issue.
