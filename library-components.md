@@ -1,3 +1,8 @@
+---
+layout: page
+title: "PAGE TITLE"
+permalink: /home-d/
+---
 # Library Components
 
 ## Function
