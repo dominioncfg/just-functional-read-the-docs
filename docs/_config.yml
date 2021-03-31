@@ -1,0 +1,6 @@
+theme: jekyll-theme-cayman
+title: Just Functional
+description: An easy-to-use, customizable math evaluator for .Net
+author: Jose Carlos Nuñez Martinez
+github:
+  repository_url: https://github.com/dominioncfg/just-functional
