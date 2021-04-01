@@ -1,6 +1,6 @@
 ---
 layout: default
-title: " Components | Just Functional"
+#title: " Components | Just Functional"
 ---
 # Library Components
 
