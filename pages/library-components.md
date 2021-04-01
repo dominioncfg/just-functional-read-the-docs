@@ -1,7 +1,6 @@
 ---
 layout: default
-title: "PAGE TITLE"
-permalink: /library-components/
+title: " Components | Just Functional"
 ---
 # Library Components
 
