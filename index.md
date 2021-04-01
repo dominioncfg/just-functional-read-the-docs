@@ -5,9 +5,7 @@ title: "Just Functional | Documentation"
 
 ## Content
 
-[Getting Started](pages/getting-started.html)
-</br>
-
+[Getting Started](pages/getting-started.html)  
 [Library Components](pages/library-components.html)
 
 Note: this site is still under construction as 2021/03/30.

@@ -1,7 +1,5 @@
 ---
 layout: default
-#title: "Getting Started | Just Functional"
-#permalink: /pages/getting-started.html
 ---
 
 # Getting Started
