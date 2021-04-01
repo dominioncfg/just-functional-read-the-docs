@@ -66,7 +66,7 @@ Like in real math in Just functional an operand can be a number, a constant like
 
 ### Variables
 
-Variables are defined in the string when creating the function and they are assigned values when evaluating throught the EvaluationContext class
+Variables are defined in the string when creating the function and they are assigned values when evaluating throught the EvaluationContext class. Variables are **case sensitive**
 
 #### Variable Provider
 
@@ -127,13 +127,64 @@ var f2 = factory.Create(fx);
 var context = new EvaluationContext(new Dictionary<string, decimal> { ["X"] = 3 });
 Console.WriteLine(f1.Evaluate(context));//output: 144
 Console.WriteLine(f2.Evaluate(context));//output: 144
+
+//'Y' is in the expression and is passed in the context, but this will fail:
+var evaluationContext = new EvaluationContext(new Dictionary<string, decimal> { ["Y"] = 3 });
+var f3 = new Function("Y+3", options);
+var f4 = factory.Create("Y+3");
+f3.Evaluate(evaluationContext);//Will fail
+f4.Evaluate(evaluationContext);//Will fail
 ```
 
 ### Constants
 
+You can use constants in your expressions, by default the library provides some you can add more. Tokens are **case sensitive**
+
+#### Default Constants
+
+| Expression| Value   |
+| ----------| --------|
+| pi        | Math.PI |
+| e         | Math.E  |
+
+#### Custom Constants
+
+The following example shows how to create a function with another constant:
+
+```C#
+string fx = "X+c";
+var constant = new Constant("c", 1);
+
+//Using the Options Directly:
+var defaultTokenProvider = new DefaultTokensProvider();
+var allConstants = defaultTokenProvider.GetAvailableConstants().ToList();
+allConstants.Add(constant);
+
+var options = new FunctionOptions(
+    evaluatorProvider: new CompiledExpressionEvaluatorFactory(),
+    tokensProvider: new CustomizableTokensProvider(defaultTokenProvider.GetAvailableOperators(), allConstants),
+    variablesProvider: null
+);
+var f1 = new Function(fx, options);
+
+// Using the Factory:
+var factory = FunctionFactoryBuilder.ConfigureFactory(options =>
+    options.WithCustomTokenProvider(tokenOptions=>
+        tokenOptions.WithConstant(constant)
+    )
+);
+var f2 = factory.Create(fx);
+
+var context = new EvaluationContext(new Dictionary<string, decimal> { ["X"] = 3 });
+Console.WriteLine(f1.Evaluate(context));//output: 4
+Console.WriteLine(f2.Evaluate(context));//output: 4
+```
+
 ## Operators
 
 ### Default Operators
+
+### Custom Operators
 
 ## Exception Handling
 
