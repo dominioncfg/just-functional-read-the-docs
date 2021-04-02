@@ -43,7 +43,7 @@ static void Main(string[] args)
 
 In the code above f1, f2, f3 are using the same configuration.
 
-You should know that the Function class and everything in it is inmutable, that is, after the creation of the object is not posible to change anything (expression, evaluator, etc), the reason for this is that inmutable objects have several advangages, like there is no side-effects, improve performance, maintanibilty, and keep things simple. If you need to construnct many function with the same configuration you should use the factory version.
+You should know that the Function class and everything in it is immutable, that is, after the creation of the object is not posible to change anything (expression, evaluator, etc), the reason for this is that immutable objects have several advangages, like there is no side-effects, improve performance, maintanibilty, and keep things simple. If you need to construnct many function with the same configuration you should use the factory version.
 
 ### Evaluation Context
 
@@ -82,6 +82,7 @@ Note that when using the compiled evaluator this proccess is only done the first
 To use this provider you can do the following:
 
 ```C#
+string fx = "(X*4)^2";
 //Using the Options Directly:
 var options = new FunctionOptions(
     evaluatorProvider: new CompiledExpressionEvaluatorFactory(),
@@ -108,6 +109,7 @@ Console.WriteLine(f2.Evaluate(context));//output: 144
 This will give you the possibility to restrict variables in the expressions. It can be use like this:
 
 ```C#
+string fx = "(X*4)^2";
 //Using the Options Directly:
 var variablesProvider = new PredefinedVariablesProvider(new[] { "X" });
 var options = new FunctionOptions(
@@ -182,7 +184,7 @@ Console.WriteLine(f1.Evaluate(context));//output: 4
 Console.WriteLine(f2.Evaluate(context));//output: 4
 ```
 
-Note that Constants are part of ITokensProvider.GetAvailableConstants() method. Also Constants should be inmutable objects.
+Note that Constants are part of ITokensProvider.GetAvailableConstants() method. Also Constants should be immutable objects.
 
 ## Operators
 
@@ -209,11 +211,11 @@ By Default the library use the **DefaultTokensProvider** class that is responsib
 | NaturalLogarithm   (log e) | ln    | ln 2.2   | 4          |
 
 *The precedence fields determine the priority of the operator.
-Ex: Multiply has a priority of 2, Add has a priority of 1 then multiply is executed first
+Ex: Multiply has a priority of 2, Add has a priority of 1 then multiply is executed first.
 
 ### Custom Operators
 
-The proccesses of creating an operator and a constants are similar but you need to make a new class that Inhherirs from the class **Operator** becuse they have some behaviour, now you should make you Operators derived class inmutable.
+The proccesses of creating an operator and a constants are similar but you need to make a new class that Inhherirs from the class **Operator** becuse they have some behaviour, note that your Operator's derived class should be immutable.
 
 Before also lets have a look at the Operator class and its fields:
 
@@ -284,14 +286,14 @@ Console.WriteLine(f2.Evaluate(context));//output: 4
 All the exceptions in just functional derive from the **JustFunctionalBaseException** so you can use only one catch.
 Below is a high level explanation of all other exceptions
 
-| Exception                        | Throws when                                                                | Example                                              |
-| -------------------------------- | -------------------------------------------------------------------------- | ---------------------------------------------------- |
-| JustFunctionalBaseException      | Base exception class                                                       |                                                      |
-| MissingOperandException          | When there is a operator with less operands that required                  | 5+  or -*5                                           |
-| MissingOperatorException         | When there operands that need a operator that is missing                   | 5X or 4+5)                                           |
-| NotSupportedException            | When there is something that is valid both is not supported by the library | At the moment only when negating a variable like: -X |
-| SyntaxErrorInExpressionException | General syntax error exception                                             | Xabc2. In here operator abc is not defined          |
-| VariableUndefinedException       | When the expression needs a variable that is not passed in the Context     | Only applies when using PredefinedVariablesProvider  |
+| Exception                        | Throws when                                                               | Example                                              |
+| -------------------------------- | ------------------------------------------------------------------------- | ---------------------------------------------------- |
+| JustFunctionalBaseException      | Base exception class                                                      |                                                      |
+| MissingOperandException          | When there is a operator with less operands that required                 | 5+  or -*5                                           |
+| MissingOperatorException         | When there are operands that need a operator that is missing              | 5X or 4+5)                                           |
+| NotSupportedException            | When there is something that is valid but is not supported by the library | At the moment only when negating a variable like: -X |
+| SyntaxErrorInExpressionException | General syntax error exception                                            | Xabc2. In here operator abc is not defined           |
+| VariableUndefinedException       | When the expression needs a variable that is not passed in the Context    | Only applies when using PredefinedVariablesProvider  |
 
 ## Low Level Components
 
