@@ -41,9 +41,11 @@ static void Main(string[] args)
 }
 ```
 
+### Immutability
+
 In the code above f1, f2, f3 are using the same configuration.
 
-You should know that the Function class and everything in it is immutable, that is, after the creation of the object is not posible to change anything (expression, evaluator, etc), the reason for this is that immutable objects have several advangages, like there is no side-effects, improve performance, maintanibilty, and keep things simple. If you need to construnct many function with the same configuration you should use the factory version.
+You should know that the Function class and everything in it is immutable, that is, after the creation of the object is not posible to change anything (expression, evaluator, operators, constants etc), the reason for this is that immutable objects have several advangages, like there is no side-effects, improve performance, maintanibilty, and keep things simple. If you need to construnct many function with the same configuration you should use the factory version.
 
 ### Evaluation Context
 
@@ -59,6 +61,8 @@ context2.RegisterVariable("X", 3);
 ```
 
 The code above shows you how you can create a context with "X=3".
+
+Note that you can create an empty EvaluationContext when you need to evaluate a Function with no variables.
 
 ## Operands
 
@@ -140,7 +144,7 @@ f4.Evaluate(evaluationContext);//Will fail
 
 ### Constants
 
-You can use constants in your expressions, by default the library provides some but you can add more. Tokens are **case sensitive**
+You can use constants in your expressions, by default the library provides some but you can add more. Tokens are **case sensitive**.
 
 #### Default Constants
 

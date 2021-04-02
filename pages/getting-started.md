@@ -33,6 +33,15 @@ decimal result =  f.Evaluate(new EvaluationContext(new Dictionary<string, decima
 //result = 144
 ```
 
+or evaluate an expression like this:
+
+```C#
+string fx = "(3*4)^2";
+Function f = new Function(fx);
+ decimal result = f.Evaluate(new EvaluationContext());
+//result = 144
+```
+
 ### Using an IoC Container
 
 If you are using an IoC Container we recommend to use the **IFunctionFactory** and that way all of your **Function** instances will share the same configuration:
