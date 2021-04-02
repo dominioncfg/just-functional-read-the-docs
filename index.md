@@ -1,11 +1,14 @@
 ---
 layout: default
-title: "Just Functional | Documentation"
 ---
 
-## Content
+# Documentation
+
+## What is Just Functional
+
+Just Functional is simple math evaluator for .Net. It offers various customization options to suit your needs.
+
+## Topics
 
 [Getting Started](pages/getting-started.html)  
 [Library Components](pages/library-components.html)
-
-Note: this site is still under construction as 2021/03/30.

@@ -106,5 +106,4 @@ Note that EvaluateAsync supports Parallel calls without any Issue.
 
 ## What's next
 
-You can learn more about how to customize the library [here](just-functional-home/)
-
+You can learn the more about the library [here](library-components.html).
