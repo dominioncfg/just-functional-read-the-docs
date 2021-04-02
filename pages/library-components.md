@@ -6,7 +6,7 @@ layout: default
 
 ## Function
 
-The function class is the entry point for Just Functional it can be constructed in serveral ways.
+The function class is the entry point for Just Functional it can be constructed in several ways.
 
 ```C#
 static void Main(string[] args)
@@ -43,11 +43,11 @@ static void Main(string[] args)
 
 In the code above f1, f2, f3 are using the same configuration.
 
-You should know also that the Function class and everything in it is inmutable, that is, after the creation of the object is not posible to change anything (expression, evaluator, etc), the reason for this that inmutable objects have several advangages, like there is no side-effects, improve performance, maintanibilty, and keep things simple. If you need to construnct many function with the same configuration you should use the factory version.
+You should know that the Function class and everything in it is inmutable, that is, after the creation of the object is not posible to change anything (expression, evaluator, etc), the reason for this is that inmutable objects have several advangages, like there is no side-effects, improve performance, maintanibilty, and keep things simple. If you need to construnct many function with the same configuration you should use the factory version.
 
 ### Evaluation Context
 
-The EvaluatorContext class is the way you supply variables values at runtime and is really straight-forward to use.
+The EvaluatorContext class is the way you supply values to variables at runtime and is really straight-forward to use.
 
 ```C#
 //Using Constructor:
@@ -66,17 +66,17 @@ Like in real math in Just functional an operand can be a number, a constant like
 
 ### Variables
 
-Variables are defined in the string when creating the function and they are assigned values when evaluating throught the EvaluationContext class. Variables are **case sensitive**.
+Variables are defined in the string when creating the function and they are assigned values when evaluating through the EvaluationContext class. Variables are **case sensitive**.
 
 #### Variable Provider
 
-The role of variable providers is to "say" what are the variables that you Function will support. Out of the box the library will use the EvaluationContext to get the variables. But let say that you need to validate user input and you only allow functions with this variables: X,Y,Z then evaluating a function with another variable like 'J' will fail even if the values are supplied in the EvaluationContext, to acheive this you could use the PredefinedVariablesProvider.
+The role of variable providers is to "say" what are the variables that you Function will support. By default the library will use the EvaluationContext to get the variables. But let say that you need to validate user input and you only allow functions with this variables: X,Y,Z then evaluating a function with another variable like 'J' will fail even if the values are supplied in the EvaluationContext, to acheive this you could use the PredefinedVariablesProvider.
 
 At the moment there are two variables provider availables:
 
 ##### EvaluationContextVariablesProvider
 
-This is the default provider and it will try to get all the available variables from the Evaluation Context whenever you evaluate your functon (Evaluate|EvaluateAsync).
+This is the default provider and it will try to get all the available variables from the Evaluation Context whenever you evaluate your function (Evaluate|EvaluateAsync).
 Note that when using the compiled evaluator this proccess is only done the first time you are Evaluating the function.
 
 To use this provider you can do the following:
@@ -105,7 +105,7 @@ Console.WriteLine(f2.Evaluate(context));//output: 144
 
 ##### PredefinedVariablesProvider
 
-This will give you the possibilty to restrict variables in the expressions. It can be use like this:
+This will give you the possibility to restrict variables in the expressions. It can be use like this:
 
 ```C#
 //Using the Options Directly:
@@ -138,7 +138,7 @@ f4.Evaluate(evaluationContext);//Will fail
 
 ### Constants
 
-You can use constants in your expressions, by default the library provides some you can add more. Tokens are **case sensitive**
+You can use constants in your expressions, by default the library provides some but you can add more. Tokens are **case sensitive**
 
 #### Default Constants
 
@@ -186,7 +186,7 @@ Note that Constants are part of ITokensProvider.GetAvailableConstants() method. 
 
 ## Operators
 
-Just like constants the library offers the posibility of customize the operators.
+Just like constants the library offers the possibility of customize the operators.
 
 ### Default Operators
 
@@ -297,7 +297,7 @@ Below is a high level explanation of all other exceptions
 
 ### Evaluators
 
-Put it simply the evaluator is the algorithim used to parse and evaluate the functions/expressions.
+Put it simply the evaluator is the algorithm used to parse and evaluate the functions/expressions.
 
 #### PostfixCompiledExpressionEvaluator
 
@@ -305,7 +305,7 @@ This is default evaluator and it consist an implementation of the [Shunting Yard
 
 #### PostfixExpressionInMemoryEvaluator
 
-This is also a version of the  [Shunting Yard](https://en.wikipedia.org/wiki/Shunting-yard_algorithm) but this time there is no compilation proccess, it will always compile and evaluate the expression.
+This is also a version of the  [Shunting Yard](https://en.wikipedia.org/wiki/Shunting-yard_algorithm) but this time there is no compilation process, it will always compile and evaluate the expression.
 
 #### What Evaluator you should use
 
