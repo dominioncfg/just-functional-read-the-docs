@@ -38,7 +38,7 @@ or evaluate an expression like this:
 ```C#
 string fx = "(3*4)^2";
 Function f = new Function(fx);
- decimal result = f.Evaluate(new EvaluationContext());
+decimal result = f.Evaluate(new EvaluationContext());
 //result = 144
 ```
 
