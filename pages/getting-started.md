@@ -9,13 +9,13 @@ layout: default
 You can install the package by adding this reference to the .csproj:
 
 ```C#
-<PackageReference Include="JustFunctional.Core" Version="1.0.9" />
+<PackageReference Include="JustFunctional.Core" Version="1.0.14" />
 ```
 
 or by using this command in the console:
 
 ```C#
-dotnet add package JustFunctional.Core --version 1.0.9
+dotnet add package JustFunctional.Core --version 1.0.14
 ```
 
 You can find the package in nuget **[here](https://www.nuget.org/packages/JustFunctional.Core/)** for more details.

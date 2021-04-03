@@ -74,7 +74,7 @@ Variables are defined in the string when creating the function and they are assi
 
 #### Variable Provider
 
-The role of variable providers is to "say" what are the variables that you Function will support. By default the library will use the EvaluationContext to get the variables. But let say that you need to validate user input and you only allow functions with this variables: X,Y,Z then evaluating a function with another variable like 'J' will fail even if the values are supplied in the EvaluationContext, to acheive this you could use the PredefinedVariablesProvider.
+The role of variable providers is to "say" what are the variables that you Function will support. By default the library will use the EvaluationContext to get the variables. But let say that you need to validate user input and you only allow functions with this variables: X,Y,Z then evaluating a function with another variable like 'J' will fail even if the values are supplied in the EvaluationContext, to achieve this you could use the PredefinedVariablesProvider.
 
 At the moment there are two variables provider availables:
 
