@@ -4,14 +4,11 @@ layout: default
 
 # Limitations and Roadmap
 
-As an open source project is not only important to document what the project can but also the things you currently cannot achieve and where the project is heading that way you can save time and use another project if this one does not suits you, and that is the purpose of this page.
-
 ## Current Limitations
 
-| Limitation                      | Description                               | Example | Current Workaound |
-| ------------------------------- | ----------------------------------------- | ------- | ----------------- |
-| Unary Plus (+)                  | Not Supported                             | X++5    | X+5               |
-| Unary Minus (-) before variable | This is supported X-5 but this is not 5-X | 5-X     | 5-X*-1            |
+| Limitation                              | Description                                   | Example         | Current Workaound  |
+| --------------------------------------- | --------------------------------------------- | --------------- | ------------------ |
+| Variable/Opertator one Containing Other | One function containing to variables X and X1 | X+X1 Will break | X1+X2 Is Supported |
 
 ## Roadmap
 

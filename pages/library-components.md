@@ -11,17 +11,43 @@ The function class is the entry point for Just Functional it can be constructed 
 ```C#
 static void Main(string[] args)
 {
-    string fx = "(X*4)^2";
     //Using the default Configuration:
-    var f1 = new Function(fx);
+    string fx = "(X*4)^2";
 
+    var f1 = new Function(fx);
+    var evaluationContext = new EvaluationContext(new Dictionary<string, decimal> { ["X"] = 3 });
+    var result = f1.Evaluate(evaluationContext);
+
+    Console.WriteLine(result);//output: 144
+}
+```
+
+```C#
+static async Task Main(string[] args)
+{
     //Using the Options Directly:
+    string fx = "(X*4)^2";
+
     var options = new FunctionOptions(
         evaluatorProvider: new CompiledExpressionEvaluatorFactory(),
         tokensProvider: new DefaultTokensProvider(),
-        variablesProvider: null //null will use EvaluationContextVariablesProvider
+        variablesProvider: null,
+        cultureProvider: new CultureProvider()
     );
-    var f2 = new Function(fx, options);
+
+    var f1 = new Function(fx, options);
+    var evaluationContext = new EvaluationContext(new Dictionary<string, decimal> { ["X"] = 3 });
+    var result = f1.Evaluate(evaluationContext);
+
+    Console.WriteLine(result);//output: 144
+}
+```
+
+```C#
+static async Task Main(string[] args)
+{
+    //Using the default Configuration:
+    string fx = "(X*4)^2";
 
     // Using the Factory:
     var factory = FunctionFactoryBuilder.ConfigureFactory(options =>
@@ -29,21 +55,22 @@ static void Main(string[] args)
         options
             .WithEvaluationContextVariablesProvider()
             .WithDefaultsTokenProvider()
-            .WithCompiledEvaluator();
-    });
-    var f3 = factory.Create(fx);
+            .WithCompiledEvaluator()
+            .WithSystemProvidedCulture();
 
-    //Use:
+    });
+
+    var f1 = factory.Create(fx);
     var evaluationContext = new EvaluationContext(new Dictionary<string, decimal> { ["X"] = 3 });
-    Console.WriteLine(f1.Evaluate(evaluationContext));//output: 144
-    Console.WriteLine(f2.Evaluate(evaluationContext));//output: 144
-    Console.WriteLine(f3.Evaluate(evaluationContext));//output: 144
+    var result = f1.Evaluate(evaluationContext);
+
+    Console.WriteLine(result);//output: 144
 }
 ```
 
-### Immutability
-
 In the code above f1, f2, f3 are using the same configuration.
+
+### Immutability
 
 You should know that the Function class and everything in it is immutable, that is, after the creation of the object is not posible to change anything (expression, evaluator, operators, constants etc), the reason for this is that immutable objects have several advangages, like there is no side-effects, improve performance, maintanibilty, and keep things simple. If you need to construct many function with the same configuration you should use the factory version.
 
@@ -86,26 +113,39 @@ Note that when using the compiled evaluator this proccess is only done the first
 To use this provider you can do the following:
 
 ```C#
-string fx = "(X*4)^2";
 //Using the Options Directly:
+string fx = "(X*4)^2";
+
 var options = new FunctionOptions(
     evaluatorProvider: new CompiledExpressionEvaluatorFactory(),
     tokensProvider: new DefaultTokensProvider(),
-    variablesProvider: null //You need to pass null as the Value for Variables Provider
+    variablesProvider: null, //You need to pass null as the Value for Variables Provider
+    cultureProvider: new CultureProvider()
 );
-var f1 = new Function(fx, options);
 
+var f1 = new Function(fx, options);
+var context = new EvaluationContext(new Dictionary<string, decimal> { ["X"] = 3 });
+var result = f1.Evaluate(context);
+
+Console.WriteLine(result);//output: 144
+```
+
+```C#
 // Using the Factory:
+string fx = "(X*4)^2";
+
 var factory = FunctionFactoryBuilder.ConfigureFactory(options =>
 {
     options
         .WithEvaluationContextVariablesProvider();
-        
+
 });
-var f2 = factory.Create(fx);
+
+var f1 = factory.Create(fx);
 var context = new EvaluationContext(new Dictionary<string, decimal> { ["X"] = 3 });
-Console.WriteLine(f1.Evaluate(context));//output: 144
-Console.WriteLine(f2.Evaluate(context));//output: 144
+var result = f1.Evaluate(context);
+
+Console.WriteLine(result);//output: 144
 ```
 
 ##### PredefinedVariablesProvider
@@ -113,33 +153,48 @@ Console.WriteLine(f2.Evaluate(context));//output: 144
 This will give you the possibility to restrict variables in the expressions. It can be use like this:
 
 ```C#
-string fx = "(X*4)^2";
 //Using the Options Directly:
+string fx = "(X*4)^2";
+
 var variablesProvider = new PredefinedVariablesProvider(new[] { "X" });
 var options = new FunctionOptions(
     evaluatorProvider: new CompiledExpressionEvaluatorFactory(),
     tokensProvider: new DefaultTokensProvider(),
-    variablesProvider: variablesProvider
+    variablesProvider: variablesProvider,
+    cultureProvider: new CultureProvider()
 );
-var f1 = new Function(fx, options);
 
+var f1 = new Function(fx, options);
+var context = new EvaluationContext(new Dictionary<string, decimal> { ["X"] = 3 });
+var result = f1.Evaluate(context);
+Console.WriteLine(result);//output: 144
+
+
+var f2 = new Function("Y+3", options);
+var evaluationContext = new EvaluationContext(new Dictionary<string, decimal> { ["Y"] = 3 });
+//'Y' is in the expression and is passed in the context, but this will fail:
+f2.Evaluate(evaluationContext);//Will fail
+```
+
+```C#
 // Using the Factory:
+string fx = "(X*4)^2";
 var factory = FunctionFactoryBuilder.ConfigureFactory(options =>
 {
     options
-        .WithPredefinedVariables("X");        
+        .WithPredefinedVariables("X");
 });
-var f2 = factory.Create(fx);
-var context = new EvaluationContext(new Dictionary<string, decimal> { ["X"] = 3 });
-Console.WriteLine(f1.Evaluate(context));//output: 144
-Console.WriteLine(f2.Evaluate(context));//output: 144
+var f1 = factory.Create(fx);
 
-//'Y' is in the expression and is passed in the context, but this will fail:
+var context = new EvaluationContext(new Dictionary<string, decimal> { ["X"] = 3 });
+var result = f1.Evaluate(context);
+Console.WriteLine(result);//output: 144
+
+
+var f2 = factory.Create("Y+3");
 var evaluationContext = new EvaluationContext(new Dictionary<string, decimal> { ["Y"] = 3 });
-var f3 = new Function("Y+3", options);
-var f4 = factory.Create("Y+3");
-f3.Evaluate(evaluationContext);//Will fail
-f4.Evaluate(evaluationContext);//Will fail
+//'Y' is in the expression and is passed in the context, but this will fail:
+f2.Evaluate(evaluationContext);//Will fail
 ```
 
 ### Constants
@@ -160,32 +215,44 @@ By Default the library use the **DefaultTokensProvider** class that is responsib
 The following example shows how to create a function with another constant:
 
 ```C#
+//Using the Options Directly:
 string fx = "X+c";
 var constant = new Constant("c", 1);
 
-//Using the Options Directly:
+
 var defaultTokenProvider = new DefaultTokensProvider();
 var allConstants = defaultTokenProvider.GetAvailableConstants().ToList();
 allConstants.Add(constant);
-
 var options = new FunctionOptions(
     evaluatorProvider: new CompiledExpressionEvaluatorFactory(),
     tokensProvider: new CustomizableTokensProvider(defaultTokenProvider.GetAvailableOperators(), allConstants),
-    variablesProvider: null
+    variablesProvider: null,
+    cultureProvider: new CultureProvider()
 );
-var f1 = new Function(fx, options);
 
+var f1 = new Function(fx, options);
+var context = new EvaluationContext(new Dictionary<string, decimal> { ["X"] = 3 });
+var result = f1.Evaluate(context);
+
+Console.WriteLine(result);//output: 4
+```
+
+```C#
 // Using the Factory:
+string fx = "X+c";
+var constant = new Constant("c", 1);
+
 var factory = FunctionFactoryBuilder.ConfigureFactory(options =>
-    options.WithCustomTokenProvider(tokenOptions=>
+    options.WithCustomTokenProvider(tokenOptions =>
         tokenOptions.WithConstant(constant)
     )
 );
-var f2 = factory.Create(fx);
 
+var f1 = factory.Create(fx);
 var context = new EvaluationContext(new Dictionary<string, decimal> { ["X"] = 3 });
-Console.WriteLine(f1.Evaluate(context));//output: 4
-Console.WriteLine(f2.Evaluate(context));//output: 4
+var result = f1.Evaluate(context);
+
+Console.WriteLine(result);//output: 4
 ```
 
 Note that Constants are part of ITokensProvider.GetAvailableConstants() method. Also Constants should be immutable objects.
@@ -258,9 +325,9 @@ public class IncrementOperator : Operator
 - Create the function with the operator:
 
 ```C#
+//Using the Options Directly:
 string fx = "Inc X";
 
-//Using the Options Directly:
 var defaultTokenProvider = new DefaultTokensProvider();
 var allOperators = defaultTokenProvider.GetAvailableOperators().ToList();
 allOperators.Add(new IncrementOperator());
@@ -268,21 +335,32 @@ allOperators.Add(new IncrementOperator());
 var options = new FunctionOptions(
     evaluatorProvider: new CompiledExpressionEvaluatorFactory(),
     tokensProvider: new CustomizableTokensProvider(allOperators, defaultTokenProvider.GetAvailableConstants()),
-    variablesProvider: null
+    variablesProvider: null,
+    cultureProvider: new CultureProvider()
 );
 var f1 = new Function(fx, options);
 
-// Using the Factory:
-var factory = FunctionFactoryBuilder.ConfigureFactory(options =>
-    options.WithCustomTokenProvider(tokenOptions =>
-        tokenOptions.WithOperator(new IncrementOperator())
-    )
-);
-var f2 = factory.Create(fx);
-
 var context = new EvaluationContext(new Dictionary<string, decimal> { ["X"] = 3 });
-Console.WriteLine(f1.Evaluate(context));//output: 4
-Console.WriteLine(f2.Evaluate(context));//output: 4
+var result = f1.Evaluate(context);
+
+Console.WriteLine(result);//output: 4
+```
+
+```C#
+// Using the Factory:
+string fx = "Inc X";
+
+var factory = FunctionFactoryBuilder.ConfigureFactory(options =>
+   options.WithCustomTokenProvider(tokenOptions =>
+       tokenOptions.WithOperator(new IncrementOperator())
+   )
+);
+
+var f1 = factory.Create(fx);
+var context = new EvaluationContext(new Dictionary<string, decimal> { ["X"] = 3 });
+var result = f1.Evaluate(context);
+
+Console.WriteLine(result);//output: 4
 ```
 
 ## Exception Handling
@@ -295,7 +373,6 @@ Below is a high level explanation of all other exceptions
 | JustFunctionalBaseException      | Base exception class                                                      |                                                      |
 | MissingOperandException          | When there is a operator with less operands that required                 | 5+  or -*5                                           |
 | MissingOperatorException         | When there are operands that need a operator that is missing              | 5X or 4+5)                                           |
-| NotSupportedException            | When there is something that is valid but is not supported by the library | At the moment only when negating a variable like: -X |
 | SyntaxErrorInExpressionException | General syntax error exception                                            | Xabc2. In here operator abc is not defined           |
 | VariableUndefinedException       | When the expression needs a variable that is not passed in the Context    | Only applies when using PredefinedVariablesProvider  |
 
@@ -325,31 +402,40 @@ Note that both evaluators are thread safe so you can use it in parallel but for 
 You can use the CompiledExpressionEvaluatorFactory/PostfixExpressionInMemoryEvaluator when using constructing the function directly or use the .WithCompiledEvaluator/.WithJustInTimeEvalutator when using the factory.
 
 ```C#
-string fx = "1 + X";
-
 //Using the Options Directly:
+string fx = "1 + X";
 var evaluator = new CompiledExpressionEvaluatorFactory();
 //or
 //var evaluator = new PostfixExpressionInMemoryEvaluator();
 var options = new FunctionOptions(
     evaluatorProvider: new CompiledExpressionEvaluatorFactory(),
     tokensProvider: new DefaultTokensProvider(),
-    variablesProvider: null
+    variablesProvider: null,
+    cultureProvider: new CultureProvider()
 );
-var f1 = new Function(fx, options);
 
+var f1 = new Function(fx, options);
+var context = new EvaluationContext(new Dictionary<string, decimal> { ["X"] = 3 });
+var result = f1.Evaluate(context);
+
+Console.WriteLine(result);//output: 4
+```
+
+```C#
 // Using the Factory:
+string fx = "1 + X";
 var factory = FunctionFactoryBuilder.ConfigureFactory(options =>
     options
     .WithCompiledEvaluator()
 //or
 //.WithJustInTimeEvalutator()
 );
-var f2 = factory.Create(fx);
+var f1 = factory.Create(fx);
 
 var context = new EvaluationContext(new Dictionary<string, decimal> { ["X"] = 3 });
-Console.WriteLine(f1.Evaluate(context));//output: 4
-Console.WriteLine(f2.Evaluate(context));//output: 4
+var result = f1.Evaluate(context);
+
+Console.WriteLine(result);//output: 4
 ```
 
 ### Tokenizers
