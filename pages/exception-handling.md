@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # Exception Handling
 
 All the exceptions in just functional derive from the **JustFunctionalBaseException** so you can use only one catch.
