@@ -106,4 +106,4 @@ Note that EvaluateAsync supports Parallel calls without any Issue.
 
 ## What's next
 
-You can learn the more about the  [Components](high-level-components.html) or go to the [docs](../)
+You can learn the more about in the [Overview](the-big-picture.html) or go to the [docs](../)

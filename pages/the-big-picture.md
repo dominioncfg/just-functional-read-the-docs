@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# High Level Components
+# The Big Picture
 
 ## Function
 
