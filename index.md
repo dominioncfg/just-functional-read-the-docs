@@ -11,9 +11,13 @@ Just Functional is simple math evaluator for .Net. It offers various customizati
 ## Topics
 
 [Getting Started](pages/getting-started.html)
+
 [The Big Picture](pages/high-level-components.html)  
-[Exception Handling](exception-handling.html)
+
+[Exception Handling](pages/exception-handling.html)
+
 [Low Level Components](pages/high-level-components.html)
+
 [Limitations and Roadmap](pages/limitations-and-roadmap.html)
 
 ## Build Status
