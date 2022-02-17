@@ -4,7 +4,7 @@ layout: default
 
 # Operators
 
-Operators play a important role in math and since is imposible to predict any use case the library comes packed with the most general operators but you can easily add your own operators to the mix.
+Operators play a important role in math and since is impossible to predict any use case the library comes packed with the most general operators but you can easily add your own operators to the mix.
 
 ## Default Operators
 
@@ -43,7 +43,8 @@ Before also lets have a look at the Operator class and its fields:
 | Type          | Numbers of operands requiered (Unary/Binary) | Binary  |
 | Associativity | Associativity (Left/Right)                   | Left    |
 
-- Create an operator class:
+With that in mind you can go ahead and create the operator.
+1- Create an operator class:
 
 ```C#
 public class IncrementOperator : Operator
@@ -67,7 +68,7 @@ public class IncrementOperator : Operator
 }
 ```
 
-- Create the function with the operator:
+2- Create the function with the operator:
 
 ```C#
 //Using the Options Directly:
