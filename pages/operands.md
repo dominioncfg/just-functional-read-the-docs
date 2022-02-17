@@ -110,7 +110,7 @@ f2.Evaluate(evaluationContext);//Will fail
 
 ## Constants
 
-You can use constants in your expressions, by default the library provides some but you can add more. Tokens are **case sensitive**.
+You can use constants in your expressions, by default the library provides some but you can add more. Constants are **case sensitive**.
 
 ### Default Constants
 
@@ -166,4 +166,8 @@ var result = f1.Evaluate(context);
 Console.WriteLine(result);//output: 4
 ```
 
-Note that Constants are part of ITokensProvider.GetAvailableConstants() method. Also Constants should be immutable objects.
+Note that constants should be **immutable** objects.
+
+## What's next
+
+You can learn the more about the [Operators](operators.html) or go to the [docs](../)

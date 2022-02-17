@@ -4,7 +4,7 @@ layout: default
 
 # Operators
 
-Just like constants the library offers the possibility of customize the operators.
+Operators play a important role in math and since is imposible to predict any use case the library comes packed with the most general operators but you can easily add your own operators to the mix.
 
 ## Default Operators
 
@@ -31,7 +31,7 @@ Ex: Multiply has a priority of 2, Add has a priority of 1 then multiply is execu
 
 ## Custom Operators
 
-The proccesses of creating an operator and a constants are similar but you need to make a new class that Inhherirs from the class **Operator** becuse they have some behaviour, note that your Operator's derived class should be immutable.
+The proccesses of creating an operator and a constants are similar but you need to make a new class that Inhherirs from the class **Operator** because they have behaviour, note that your Operator's derived class should be **immutable**.
 
 Before also lets have a look at the Operator class and its fields:
 
@@ -107,3 +107,7 @@ var result = f1.Evaluate(context);
 
 Console.WriteLine(result);//output: 4
 ```
+
+## What's next
+
+You can learn the more about the [Exception Handling](exception-handling.html) or go to the [docs](../)

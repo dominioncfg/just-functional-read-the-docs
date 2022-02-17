@@ -33,9 +33,9 @@ static async Task Main(string[] args)
         cultureProvider: new CultureProvider()
     );
 
-    var f1 = new Function(fx, options);
+    var f2 = new Function(fx, options);
     var evaluationContext = new EvaluationContext(new Dictionary<string, decimal> { ["X"] = 3 });
-    var result = f1.Evaluate(evaluationContext);
+    var result = f2.Evaluate(evaluationContext);
 
     Console.WriteLine(result);//output: 144
 }
@@ -44,10 +44,9 @@ static async Task Main(string[] args)
 ```C#
 static async Task Main(string[] args)
 {
-    //Using the default Configuration:
-    string fx = "(X*4)^2";
-
     // Using the Factory:
+    string fx = "(X*4)^2";
+    
     var factory = FunctionFactoryBuilder.ConfigureFactory(options =>
     {
         options
@@ -58,9 +57,9 @@ static async Task Main(string[] args)
 
     });
 
-    var f1 = factory.Create(fx);
+    var f3 = factory.Create(fx);
     var evaluationContext = new EvaluationContext(new Dictionary<string, decimal> { ["X"] = 3 });
-    var result = f1.Evaluate(evaluationContext);
+    var result = f3.Evaluate(evaluationContext);
 
     Console.WriteLine(result);//output: 144
 }
@@ -88,3 +87,7 @@ context2.RegisterVariable("X", 3);
 The code above shows you how you can create a context with "X=3".
 
 Note that you can create an empty EvaluationContext when you need to evaluate a Function with no variables.
+
+## What's next
+
+You can learn the more about the [Operands](operands.html) or go to the [docs](../)
