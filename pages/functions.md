@@ -67,10 +67,6 @@ static async Task Main(string[] args)
 
 In the code above f1, f2, f3 are using the same configuration.
 
-## Immutability
-
-You should know that the Function class and everything in it is immutable, that is, after the creation of the object is not posible to change anything (expression, evaluator, operators, constants etc), the reason for this is that immutable objects have several advangages, like there is no side-effects, improve performance, maintanibilty, and keep things simple. If you need to construct many function with the same configuration you should use the factory version.
-
 ## Evaluation Context
 
 The EvaluatorContext class is the way you supply values to variables at runtime and is really straight-forward to use.
