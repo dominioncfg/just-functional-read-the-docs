@@ -66,4 +66,4 @@ The tokenizer is the object responsible of converting individuals characters in 
 
 ## What's next
 
-You can learn the more about the [Limitations and Roadmap](pages/limitations-and-roadmap.html) or go to the [docs](../)
+You can learn the more about the [Limitations and Roadmap](limitations-and-roadmap.html) or go to the [docs](../)
