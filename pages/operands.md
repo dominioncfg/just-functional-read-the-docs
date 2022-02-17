@@ -6,17 +6,17 @@ layout: default
 
 Like in real math in Just functional an operand can be a number, a constant like Pi, or a variable.
 
-### Variables
+## Variables
 
 Variables are defined in the string when creating the function and they are assigned values when evaluating through the EvaluationContext class. Variables are **case sensitive**.
 
-#### Variable Provider
+### Variable Provider
 
 The role of variable providers is to "say" what are the variables that you Function will support. By default the library will use the EvaluationContext to get the variables. But let say that you need to validate user input and you only allow functions with this variables: X,Y,Z then evaluating a function with another variable like 'J' will fail even if the values are supplied in the EvaluationContext, to achieve this you could use the PredefinedVariablesProvider.
 
 At the moment there are two variables provider availables:
 
-##### EvaluationContextVariablesProvider
+#### EvaluationContextVariablesProvider
 
 This is the default provider and it will try to get all the available variables from the Evaluation Context whenever you evaluate your function (Evaluate|EvaluateAsync).
 Note that when using the compiled evaluator this proccess is only done the first time you are Evaluating the function.
@@ -59,7 +59,7 @@ var result = f1.Evaluate(context);
 Console.WriteLine(result);//output: 144
 ```
 
-##### PredefinedVariablesProvider
+#### PredefinedVariablesProvider
 
 This will give you the possibility to restrict variables in the expressions. It can be use like this:
 
@@ -108,11 +108,11 @@ var evaluationContext = new EvaluationContext(new Dictionary<string, decimal> { 
 f2.Evaluate(evaluationContext);//Will fail
 ```
 
-### Constants
+## Constants
 
 You can use constants in your expressions, by default the library provides some but you can add more. Tokens are **case sensitive**.
 
-#### Default Constants
+### Default Constants
 
 By Default the library use the **DefaultTokensProvider** class that is responsible for Operators and Constants available to your function. And comes with the following Constants:
 
@@ -121,7 +121,7 @@ By Default the library use the **DefaultTokensProvider** class that is responsib
 | pi         | System.Math.PI |
 | e          | System.Math.E  |
 
-#### Custom Constants
+### Custom Constants
 
 The following example shows how to create a function with another constant:
 

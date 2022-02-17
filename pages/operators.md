@@ -6,7 +6,7 @@ layout: default
 
 Just like constants the library offers the possibility of customize the operators.
 
-### Default Operators
+## Default Operators
 
 By Default the library use the **DefaultTokensProvider** class that is responsible for Operators and Constants available to your function. And it includes the following Operators:
 
@@ -29,7 +29,7 @@ By Default the library use the **DefaultTokensProvider** class that is responsib
 *The precedence fields determine the priority of the operator.
 Ex: Multiply has a priority of 2, Add has a priority of 1 then multiply is executed first.
 
-### Custom Operators
+## Custom Operators
 
 The proccesses of creating an operator and a constants are similar but you need to make a new class that Inhherirs from the class **Operator** becuse they have some behaviour, note that your Operator's derived class should be immutable.
 
