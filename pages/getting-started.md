@@ -14,7 +14,7 @@ You can install the package by adding this reference to the .csproj:
 
 or by using this command in the console:
 
-```C#
+```bash
 dotnet add package JustFunctional.Core --version 2.0.1
 ```
 
