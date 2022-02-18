@@ -31,7 +31,7 @@ TryCreateFunctionResult result = factory.TryCreate(fx);
 
 ## Using the evaluation context variable provider
 
-When you're using the evalutaion context you will need to supply the variables as well:
+When you're using the evaluation context you will need to supply the variables as well:
 
 ```C#
 var factory = FunctionFactoryBuilder.ConfigureFactory(options =>
