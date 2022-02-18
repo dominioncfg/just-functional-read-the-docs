@@ -9,13 +9,13 @@ layout: default
 You can install the package by adding this reference to the .csproj:
 
 ```C#
-<PackageReference Include="JustFunctional.Core" Version="1.1.0" />
+<PackageReference Include="JustFunctional.Core" Version="2.0.1" />
 ```
 
 or by using this command in the console:
 
 ```C#
-dotnet add package JustFunctional.Core --version 1.1.0
+dotnet add package JustFunctional.Core --version 2.0.1
 ```
 
 You can find the package in nuget **[here](https://www.nuget.org/packages/JustFunctional.Core/)** for more details.
@@ -83,26 +83,42 @@ public void ConfigureServices(IServiceCollection services)
 
 ```C#
 using JustFunctional.Core;
-[ApiController]
-[Route("[controller]")]
+[ApiController()]
+[Route("api/maths")]
 public class MathController : ControllerBase
 {
     private readonly IFunctionFactory _functionFactory;
+
     public MathController(IFunctionFactory functionFactory)
     {
         _functionFactory = functionFactory;
     }
-    [HttpGet]
-    public async Task<decimal> Get()
+
+    [HttpGet("evaluate")]
+    public async Task<decimal> Evaluate([FromQuery] decimal x)
     {
         string fx = "(X*4)^2";
         Function f = _functionFactory.Create(fx);
-        return await f.EvaluateAsync(new EvaluationContext(new Dictionary<string, decimal>() { ["X"] = 3 }));
+        return await f.EvaluateAsync(new EvaluationContext(new Dictionary<string, decimal>() {["X"] = x}));
     }
 }
 ```
 
 Note that EvaluateAsync supports Parallel calls without any Issue.
+
+### Validate if an expression is syntactically correct
+
+You can use the **TryCreate** before evaluating a given function to make sure the expression is correct
+
+```C#
+[HttpGet("is-valid")]
+public  TryCreateFunctionResult IsValid([FromQuery] string fx)
+{
+    var allowedVariables = new PredefinedVariablesProvider("X");
+    TryCreateFunctionResult result = _functionFactory.TryCreate(fx,allowedVariables);
+    return result;
+}
+```
 
 ## What's next
 
