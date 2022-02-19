@@ -86,4 +86,4 @@ Note that you can create an empty EvaluationContext when you need to evaluate a 
 
 ## What's next
 
-You can learn the more about the [Operands](operands.html) or go to the [docs](../)
+You can learn the more about the [Operands](operands.html) or go to the [docs](../).

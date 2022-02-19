@@ -31,3 +31,7 @@ Function f = new Function(fx);
 decimal result =  f.Evaluate(new EvaluationContext(new Dictionary<string, decimal>(){["X"]=3,["Y"]=2}));
 //result = 25
 ```
+
+## What's next
+
+You can learn the more about the [Syntax Validation](syntax-validation.html) or go to the [docs](../).

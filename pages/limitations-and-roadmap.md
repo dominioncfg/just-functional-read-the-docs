@@ -22,4 +22,4 @@ The idea here is to add support for solving equations using well known algorithm
 
 ## Learn More
 
-You can learn more about the library in the [docs](../)
+You can learn more about the library in the [docs](../).

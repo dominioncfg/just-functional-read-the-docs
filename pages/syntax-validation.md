@@ -46,3 +46,7 @@ string fx = "(X*4)^2";
 var allowedVariables = new PredefinedVariablesProvider("X");
 TryCreateFunctionResult result = factory.TryCreate(fx, allowedVariables);
 ```
+
+## What's next
+
+You can learn the more about the [Functions](functions.html) or go to the [docs](../).

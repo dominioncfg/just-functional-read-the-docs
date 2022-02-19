@@ -32,4 +32,4 @@ catch (JustFunctionalBaseException e)
 
 ## What's next
 
-You can learn the more about the [Low Level Components](low-level-components.html) or go to the [docs](../)
+You can learn the more about the [Low Level Components](low-level-components.html) or go to the [docs](../).

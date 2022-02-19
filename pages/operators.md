@@ -111,4 +111,4 @@ Console.WriteLine(result);//output: 4
 
 ## What's next
 
-You can learn the more about the [Exception Handling](exception-handling.html) or go to the [docs](../)
+You can learn the more about the [Exception Handling](exception-handling.html) or go to the [docs](../).

@@ -170,4 +170,4 @@ Note that constants should be **immutable** objects.
 
 ## What's next
 
-You can learn the more about the [Operators](operators.html) or go to the [docs](../)
+You can learn the more about the [Operators](operators.html) or go to the [docs](../).
