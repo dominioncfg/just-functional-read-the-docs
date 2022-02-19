@@ -1,5 +1,0 @@
-- Test Examples with v2
-    -functions
-    -low-level-components
-    -operands
-    -operators
