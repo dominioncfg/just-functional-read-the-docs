@@ -12,6 +12,7 @@ In this section you will find recipes of how you can use **Just Functional** for
 string fx = "(3+2)^2";
 Function f = new Function(fx);
 decimal result =  f.Evaluate(new EvaluationContext());
+//result = 25
 ```
 
 ## Function with single variable

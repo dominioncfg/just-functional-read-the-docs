@@ -33,7 +33,7 @@ decimal result =  f.Evaluate(new EvaluationContext(new Dictionary<string, decima
 //result = 144
 ```
 
-or evaluate an expression like this:
+or evaluate an constant expression like this:
 
 ```C#
 string fx = "(3*4)^2";
