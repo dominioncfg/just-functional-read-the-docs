@@ -6,7 +6,7 @@ layout: default
 
 ## What is Just Functional
 
-Just Functional is simple math evaluator for .Net. It offers various customization options to suit your needs.
+Just Functional is an open-source math evaluator for .Net. It’s easy to get started with, just install a nuget package and add four lines of code and you are good to go. Here you will find all you need to know about the library, hope you find it useful.
 
 ## Topics
 
