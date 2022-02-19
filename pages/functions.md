@@ -7,62 +7,52 @@ layout: default
 The function class is the entry point for Just Functional it can be constructed in several ways.
 
 ```C#
-static void Main(string[] args)
-{
-    //Using the default Configuration:
-    string fx = "(X*4)^2";
+//Using the default Configuration:
+string fx = "(X*4)^2";
 
-    var f1 = new Function(fx);
-    var evaluationContext = new EvaluationContext(new Dictionary<string, decimal> { ["X"] = 3 });
-    var result = f1.Evaluate(evaluationContext);
+var f1 = new Function(fx);
+var evaluationContext = new EvaluationContext(new Dictionary<string, decimal> { ["X"] = 3 });
+var result = f1.Evaluate(evaluationContext);
 
-    Console.WriteLine(result);//output: 144
-}
+Console.WriteLine(result);//output: 144
 ```
 
 ```C#
-static async Task Main(string[] args)
-{
-    //Using the Options Directly:
-    string fx = "(X*4)^2";
+//Using the Options Directly:
+string fx = "(X*4)^2";
 
-    var options = new FunctionOptions(
-        evaluatorProvider: new CompiledExpressionEvaluatorFactory(),
-        tokensProvider: new DefaultTokensProvider(),
-        variablesProvider: null,
-        cultureProvider: new CultureProvider()
-    );
+var options = new FunctionOptions(
+    evaluatorProvider: new CompiledExpressionEvaluatorFactory(),
+    tokensProvider: new DefaultTokensProvider(),
+    variablesProvider: null,
+    cultureProvider: new CultureProvider()
+);
 
-    var f2 = new Function(fx, options);
-    var evaluationContext = new EvaluationContext(new Dictionary<string, decimal> { ["X"] = 3 });
-    var result = f2.Evaluate(evaluationContext);
+var f2 = new Function(fx, options);
+var evaluationContext = new EvaluationContext(new Dictionary<string, decimal> { ["X"] = 3 });
+var result = f2.Evaluate(evaluationContext);
 
-    Console.WriteLine(result);//output: 144
-}
+Console.WriteLine(result);//output: 144
 ```
 
 ```C#
-static async Task Main(string[] args)
+// Using the Factory:
+string fx = "(X*4)^2";
+
+var factory = FunctionFactoryBuilder.ConfigureFactory(options =>
 {
-    // Using the Factory:
-    string fx = "(X*4)^2";
-    
-    var factory = FunctionFactoryBuilder.ConfigureFactory(options =>
-    {
-        options
-            .WithEvaluationContextVariablesProvider()
-            .WithDefaultsTokenProvider()
-            .WithCompiledEvaluator()
-            .WithSystemProvidedCulture();
+    options
+        .WithEvaluationContextVariablesProvider()
+        .WithDefaultsTokenProvider()
+        .WithCompiledEvaluator()
+        .WithSystemProvidedCulture();
+});
 
-    });
+var f3 = factory.Create(fx);
+var evaluationContext = new EvaluationContext(new Dictionary<string, decimal> { ["X"] = 3 });
+var result = f3.Evaluate(evaluationContext);
 
-    var f3 = factory.Create(fx);
-    var evaluationContext = new EvaluationContext(new Dictionary<string, decimal> { ["X"] = 3 });
-    var result = f3.Evaluate(evaluationContext);
-
-    Console.WriteLine(result);//output: 144
-}
+Console.WriteLine(result);//output: 144
 ```
 
 In the code above f1, f2, f3 are using the same configuration.
