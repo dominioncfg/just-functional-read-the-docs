@@ -5,3 +5,5 @@ author: Jose Carlos Nuñez Martinez
 google_analytics: G-QLTFCT49JE
 github:
   repository_url: https://github.com/dominioncfg/just-functional
+plugins:
+  - jekyll-sitemap
