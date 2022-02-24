@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# Documentation
+# Just Functional
 
 ## What is Just Functional
 
