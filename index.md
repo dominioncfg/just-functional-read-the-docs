@@ -12,6 +12,8 @@ Just Functional is an open-source math evaluator for .Net. It’s easy to get st
 
 [Getting Started](pages/getting-started.html)
 
+- [Try it Out](pages/try-it-out.html)
+
 [The Big Picture](pages/the-big-picture.html)  
 
 - [Evaluation](pages/evaluation.html)

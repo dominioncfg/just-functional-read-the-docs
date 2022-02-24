@@ -122,4 +122,4 @@ public  TryCreateFunctionResult IsValid([FromQuery] string fx)
 
 ## What's next
 
-You can learn the more about in the [Overview](the-big-picture.html) or go to the [docs](../).
+You can learn the more about in the [Try It Out](try-it-out.html) or go to the [docs](../).
