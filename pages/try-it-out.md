@@ -13,10 +13,10 @@ Just functional web is a reference web api for Just Functional, you can check th
 You can use the following script to create a docker container from the image:
 
 ```bash
-docker run -dt --name my-evaluator -p 5698:80 josecdom94/just-functional-api:2.0.1
+docker run -dt --name my-evaluator -p 5698:80 josecdom94/just-functional-api:2.0.2
 ```
 
-If everything went well swagger should be now listening at <https://localhost:5698/swagger>
+If everything went well swagger should be now listening at <http://localhost:5698/swagger>
 
 ### Download run and use the app
 
