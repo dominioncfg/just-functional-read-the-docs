@@ -33,31 +33,36 @@ const EvaluatorComponent = {
         }
     },
     template: `
+    <div>
         <div class="form-group">
-            <label class="form-group__label">Expression</label>
-            <input class="form-group__field" type="text" v-model="expression">
+            <label for='expression'>Expression</label>
+            <input v-model="expression" class="form-group__input" type="text" name='expression'/>
         </div>
 
         <div>
             <h3>Variables</h3>
             <div><button @click="addVariable">Add</button></div>
         </div>
-        <div>
+        <div class="form-group">
             <div v-for="(variable, counter) in variables" v-bind:key="counter">
-                <span @click="deleteVariable(counter)">x</span>
-                <label for="name">{{counter+1}}. Name:</label>
-                <input type="name" v-model.lazy="variable.name" required>
-                <label for="value">Value:</label>
-                <input type="value" v-model.lazy="variable.value" required>
+                <label for="name{{counter}}">{{counter+1}}. Name:</label>
+                <input v-model.lazy="variable.name" type="text" name="name{{counter}}" class="form-group__input" required>
+                
+                <label for="value{{counter}}">Value:</label>
+                <input v-model.lazy="variable.value" type="text" name="value{{counter}}" class="form-group__input"  required>
+
+                <!--<div><span @click="deleteVariable(counter)">x</span></div>-->
             </div>
         </div>
+        
         <div>
             <a class='main-button' @click="evaluate">Calculate</a>
         </div>
         <div>
             <label>Result:</label>
             <div>{{result}}</div>
-        </div>`
+        </div>
+    </div>`
 };
 
 const ValidationComponent = {

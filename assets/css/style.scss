@@ -1,6 +1,4 @@
----
----
- @import "{{ site.theme }}";
+--- --- @import "{{ site.theme }}";
 
 footer {
   display: none !important;
@@ -26,17 +24,46 @@ footer {
     padding: 0.75rem 1rem;
 
     &:hover {
-      color: rgba(255,255,255,0.8);
+      color: rgba(255, 255, 255, 0.8);
       text-decoration: none;
-      background-color: rgba(255,255,255,0.2);
-      border-color: rgba(255,255,255,0.3);
+      background-color: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.3);
     }
   }
-  
 
-  .application-container, .application-header
-  {
+
+  .application-container,
+  .application-header {
     display: flex;
     justify-content: center;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .form-group label {
+    flex: none;
+    display: block;
+    width: 125px;
+    font-weight: bold;
+    font-size: 1em;
+  }
+
+  .form-group label.right-inline {
+    text-align: right;
+    padding-right: 8px;
+    padding-left: 10px;
+    width: auto;
+  }
+
+  .form-group .form-group__input {
+    flex: 1 1 auto;
+    display: block;
+    margin-bottom: 10px;
+    margin-right: 8px;
+    padding: 4px;
+    margin-top: -4px;
   }
 }
