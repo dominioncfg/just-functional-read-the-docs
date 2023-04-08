@@ -28,7 +28,6 @@ const EvaluatorComponent = {
                 const response = await axios.get(requestUrl);
                 this.result = response.data.result;
             } catch (error) {
-                console.error(error);
                 this.result = null;
             }
         }
@@ -93,7 +92,7 @@ const ValidationComponent = {
                 const response = await axios.get(requestUrl);
                 this.isValid = response.data.success;
             } catch (error) {
-                console.error(error);
+                this.isValid = false;
             }
         }
     },
@@ -120,8 +119,8 @@ const ValidationComponent = {
         </div>
 
         <div class="form-result">
-            <label v-if='isValid===true' >The Expression is valid.</label>
-            <label v-if='isValid===false' >The Expression is not valid.</label>            
+            <label v-if='isValid===true' class="success-message">The Expression is valid.</label>
+            <label v-if='isValid===false' class="error-message">The Expression is not valid.</label>            
         </div>          
     </div>`
 };
