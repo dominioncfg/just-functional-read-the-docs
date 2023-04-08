@@ -145,8 +145,8 @@ const rootComponent = {
     template: `
         <div>
             <div class='application-header'>
-                <a class='main-button' @click="showEvaluatorOnly">Evaluation</a>
-                <a class='main-button' @click="showValidatorOnly">Validation</a>
+                <a class='main-button' :class="showEvaluator? 'selected':''" @click="showEvaluatorOnly">Evaluation</a>
+                <a class='main-button' :class="showValidator? 'selected':''" @click="showValidatorOnly">Validation</a>
             </div>
             <div class='application-container'>
                 <div class="component-container" v-if="showEvaluator">
