@@ -70,8 +70,11 @@ footer {
   }
 
   /*To Do: Responsive*/
-  .application-header 
+  .application-container 
   {
-    min-width: 800px;
+    .component-container
+    {
+      min-width: 800px;
+    }    
   }
 }

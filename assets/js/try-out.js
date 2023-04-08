@@ -146,12 +146,12 @@ const rootComponent = {
                 <a class='main-button' @click="showValidatorOnly">Validation</a>
             </div>
             <div class='application-container'>
-                    <div v-if="showEvaluator">
-                        <evaluator />
-                    </div>
-                    <div v-if="showValidator">
-                        <validation />
-                    </div>
+                <div class="component-container" v-if="showEvaluator">
+                    <evaluator />
+                </div>
+                <div class="component-container" v-if="showValidator">
+                    <validation />
+                </div>
             </div>
         </div>`
 };
