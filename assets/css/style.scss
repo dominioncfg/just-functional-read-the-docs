@@ -31,6 +31,10 @@ footer {
       background-color: rgba(255, 255, 255, 0.2);
       border-color: rgba(255, 255, 255, 0.3);
     }
+
+    &.main-button--small {
+      padding: 0.25rem 0.5rem;
+    }
   }
 
 
@@ -43,30 +47,37 @@ footer {
   .form-group {
     display: flex;
     flex-direction: row;
+
+    label {
+      flex: none;
+      display: block;
+      width: 125px;
+      font-weight: bold;
+      font-size: 1em;
+
+      &.right-inline {
+        text-align: right;
+        padding-right: 8px;
+        padding-left: 10px;
+        width: auto;
+      }
+    }
+
+    .form-group__input {
+      flex: 1 1 auto;
+      display: block;
+      margin-bottom: 10px;
+      margin-right: 8px;
+      padding: 4px;
+      margin-top: -4px;
+    }
+  
   }
 
-  .form-group label {
-    flex: none;
-    display: block;
-    width: 125px;
-    font-weight: bold;
-    font-size: 1em;
-  }
-
-  .form-group label.right-inline {
-    text-align: right;
-    padding-right: 8px;
-    padding-left: 10px;
-    width: auto;
-  }
-
-  .form-group .form-group__input {
-    flex: 1 1 auto;
-    display: block;
-    margin-bottom: 10px;
-    margin-right: 8px;
-    padding: 4px;
-    margin-top: -4px;
+  .form-action
+  {
+    display: flex;
+    justify-content: center;
   }
 
   /*To Do: Responsive*/
