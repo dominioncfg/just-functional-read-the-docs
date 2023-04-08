@@ -42,7 +42,7 @@ footer {
       background-color: rgba(255, 255, 255, 0.2);
       border-color: rgba(255, 255, 255, 0.3);
     }
-    &:hover::before, &.selected {
+    &:hover::before, &.selected::before {
       opacity: 0;
     }
 
