@@ -51,7 +51,7 @@ const EvaluatorComponent = {
             <label class="right-inline" :for="'value' + counter">Value</label>
             <input v-model.lazy="variable.value" type="text" :name="'value' + counter" class="form-group__input"  required>
 
-            <span class='main-button remove-action' @click="deleteVariable(counter)">x</span>
+            <span class='main-button form-group__remove-action' @click="deleteVariable(counter)">x</span>
         </div>
 
         <div class='form-action'>
