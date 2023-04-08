@@ -59,7 +59,6 @@ footer {
         text-align: right;
         padding-right: 8px;
         padding-left: 10px;
-        width: auto;
       }
     }
 
@@ -76,6 +75,7 @@ footer {
 
   .form-action
   {
+    padding-top: 40px;
     display: flex;
     justify-content: center;
   }
