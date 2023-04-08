@@ -43,18 +43,16 @@ const EvaluatorComponent = {
             <h3>Variables</h3>
             <div><button @click="addVariable">Add</button></div>
         </div>
-        <div class="form-group">
-            <div v-for="(variable, counter) in variables" v-bind:key="counter">
-                <label for="name{{counter}}">{{counter+1}}. Name:</label>
-                <input v-model.lazy="variable.name" type="text" name="name{{counter}}" class="form-group__input" required>
+        <div class="form-group" v-for="(variable, counter) in variables" v-bind:key="counter">
+            <label :for="'name' + counter">{{counter+1}}. Name:</label>
+            <input v-model.lazy="variable.name" type="text" name="name{{counter}}" class="form-group__input" required>
                 
-                <label for="value{{counter}}">Value:</label>
-                <input v-model.lazy="variable.value" type="text" name="value{{counter}}" class="form-group__input"  required>
+            <label class="right-inline" for="value{{counter}}">Value:</label>
+            <input v-model.lazy="variable.value" type="text" name="value{{counter}}" class="form-group__input"  required>
 
-                <!--<div><span @click="deleteVariable(counter)">x</span></div>-->
-            </div>
+            <!--<div><span @click="deleteVariable(counter)">x</span></div>-->
         </div>
-        
+
         <div>
             <a class='main-button' @click="evaluate">Calculate</a>
         </div>
