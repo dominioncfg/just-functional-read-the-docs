@@ -54,6 +54,11 @@ footer {
       padding: 0.25rem 0.5rem;
       margin-right: 8px;
     }
+
+    &.selected
+    {
+      background-image: linear-gradient(120deg, #144f31, #0a4427);
+    }
   }
 
 
