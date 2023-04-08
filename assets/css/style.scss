@@ -49,10 +49,9 @@ footer {
     justify-content: center;
   }
 
-  .form-group-section-header
-  {
+  .form-group-section-header {
     display: flex;
-    justify-content: space-between;    
+    justify-content: space-between;
   }
 
   .form-group {
@@ -80,25 +79,35 @@ footer {
       margin-right: 8px;
       padding: 4px;
       margin-top: -4px;
+      padding: 0.25rem 0.5rem;
+      margin-right: 8px;
     }
 
-  }
-
-  .form-action {
-    padding-top: 15px;
-    display: flex;
-    justify-content: center;
-  }
-
-  .form-result {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  /*To Do: Responsive*/
-  .application-container {
-    .component-container {
-      min-width: 800px;
+    .form-group__remove-action {
+      margin-bottom: auto;
+      flex: 1 1 auto;
+      margin-top: -4px;
+      background-image: linear-gradient(120deg, #998b15, #991515);
     }
   }
+
+}
+
+.form-action {
+  padding-top: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+.form-result {
+  display: flex;
+  justify-content: space-between;
+}
+
+/*To Do: Responsive*/
+.application-container {
+  .component-container {
+    min-width: 800px;
+  }
+}
 }
