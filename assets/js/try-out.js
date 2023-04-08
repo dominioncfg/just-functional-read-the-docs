@@ -9,7 +9,7 @@ const EvaluatorComponent = {
     },
     methods: {
         addVariable() {
-            this.variables.push({ name: "", value: "0" });
+            this.variables.push({ name: "", value: null });
         },
         deleteVariable(counter) {
             this.variables.splice(counter, 1);
@@ -29,6 +29,7 @@ const EvaluatorComponent = {
                 this.result = response.data.result;
             } catch (error) {
                 console.error(error);
+                this.result = null;
             }
         }
     },
@@ -56,9 +57,9 @@ const EvaluatorComponent = {
         <div class='form-action'>
             <a class='main-button main-button--small' @click="evaluate">Calculate</a>
         </div>
-        <div>
+        <div class="form-result">
             <label>Result:</label>
-            <div>{{result}}</div>
+            <label>{{result}}</label>
         </div>
     </div>`
 };

@@ -70,22 +70,24 @@ footer {
       padding: 4px;
       margin-top: -4px;
     }
-  
+
   }
 
-  .form-action
-  {
-    padding-top: 40px;
+  .form-action {
+    padding-top: 15px;
     display: flex;
     justify-content: center;
   }
 
+  .form-result {
+    display: flex;
+    justify-content: space-between;
+  }
+
   /*To Do: Responsive*/
-  .application-container 
-  {
-    .component-container
-    {
+  .application-container {
+    .component-container {
       min-width: 800px;
-    }    
+    }
   }
 }
