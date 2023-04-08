@@ -1,6 +1,4 @@
----
----
-@import "{{ site.theme }}";
+--- --- @import "{{ site.theme }}";
 
 footer {
   display: none !important;
@@ -67,5 +65,11 @@ footer {
     margin-right: 8px;
     padding: 4px;
     margin-top: -4px;
+  }
+
+  /*To Do: Responsive*/
+  .application-header 
+  {
+    min-width: 800px;
   }
 }
