@@ -98,29 +98,32 @@ const ValidationComponent = {
         }
     },
     template: `
+    <div>
         <div class="form-group">
-            <label class="form-group__label">Expression</label>
-            <input class="form-group__field" type="text" v-model="expression">
+            <label for="expression" class="form-group__label">Expression</label>
+            <input v-model="expression" type="text" name="expression" class="form-group__input">
+        </div>
+        
+        <div class="form-group-section-header">
+            <h3>Variables</h3>
+            <a class='main-button tool-button-small' @click="addVariable">Add</a>
         </div>
 
-        <div>
-            <h3>Variables</h3>
-            <div><button @click="addVariable">Add</button></div>
+        <div v-for="(variable, counter) in variables" v-bind:key="counter" class="form-group">
+            <label :for="'name' + counter">{{counter+1}}. Name:</label>
+            <input v-model.lazy="variable.name" type="text"  :name="'name' + counter" class="form-group__input" required>
+            <span class='main-button form-group__remove-action' @click="deleteVariable(counter)">x</span>
         </div>
-        <div>
-            <div v-for="(variable, counter) in variables" v-bind:key="counter">
-                <span @click="deleteVariable(counter)">x</span>
-                <label for="name">{{counter+1}}. Name:</label>
-                <input type="name" v-model.lazy="variable.name" required>               
-            </div>
+
+        <div class='form-action'>
+            <a class='main-button main-button--small' @click="validate">Validate</a>
         </div>
-        <div>
-            <a class='main-button' @click="validate">Validate</a>
-        </div>
-        <div>
+
+        <div class="form-result">
             <label v-if='isValid===true' >The Expression is valid.</label>
             <label v-if='isValid===false' >The Expression is not valid.</label>            
-        </div>`
+        </div>          
+    </div>`
 };
 
 const rootComponent = {
