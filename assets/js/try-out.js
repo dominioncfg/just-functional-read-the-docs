@@ -137,8 +137,8 @@ const backendRootUrl = 'https://justfunctionalevaluator.azurewebsites.net/api/v2
             }
         },
         template: `
-        <button @click="showEvaluatorOnly">Evaluation</button>
-        <button @click="showValidatorOnly">Validation</button>
+        <a class='main-button' @click="showEvaluatorOnly">Evaluation</a>
+        <a class='main-button' @click="showValidatorOnly">Validation</a>
         <div>
             <div v-if="showEvaluator">
                 <evaluator />
