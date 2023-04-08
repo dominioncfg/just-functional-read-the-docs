@@ -109,7 +109,7 @@ const ValidationComponent = {
         </div>
 
         <div v-for="(variable, counter) in variables" v-bind:key="counter" class="form-group">
-            <label :for="'name' + counter">{{counter+1}}. Name:</label>
+            <label :for="'name' + counter">{{counter+1}}. Name</label>
             <input v-model.lazy="variable.name" type="text"  :name="'name' + counter" class="form-group__input" required>
             <span class='main-button form-group__remove-action' @click="deleteVariable(counter)">x</span>
         </div>
