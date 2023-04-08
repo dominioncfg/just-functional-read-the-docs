@@ -32,8 +32,9 @@ footer {
       border-color: rgba(255,255,255,0.3);
     }
   }
+  
 
-  .application-container
+  .application-container, .application-header
   {
     display: flex;
     justify-content: center;
