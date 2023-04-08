@@ -23,41 +23,41 @@ layout: default
 
 
 <script>
-        const backendRootUrl = 'https://justfunctionalevaluator.azurewebsites.net/api/v2/math';
-        const EvaluatorComponent = {
-            data() {
-                return {
-                    expression: '',
-                    variables: [],
-                    result: 0
-                }
+    const backendRootUrl = 'https://justfunctionalevaluator.azurewebsites.net/api/v2/math';
+    const EvaluatorComponent = {
+        data() {
+            return {
+                expression: '',
+                variables: [],
+                result: 0
+            }
+        },
+        methods: {
+            addVariable() {
+                this.variables.push({ name: "", value: "0" });
             },
-            methods: {
-                addVariable() {
-                    this.variables.push({ name: "", value: "0" });
-                },
-                deleteVariable(counter) {
-                    this.variables.splice(counter, 1);
-                },
-                async evaluate() {
-                    const fx = this.expression;
-                    const backendUrl = new URL(`${backendRootUrl}/evaluate`);
-
-                    backendUrl.searchParams.append("expression", fx);
-                    this.variables.forEach(variable => {
-                        backendUrl.searchParams.append(`Variables[${variable.name}]`, variable.value);
-                    });
-                    const requestUrl = backendUrl.href
-
-                    try {
-                        const response = await axios.get(requestUrl);
-                        this.result = response.data.result;
-                    } catch (error) {
-                        console.error(error);
-                    }
-                }
+            deleteVariable(counter) {
+                this.variables.splice(counter, 1);
             },
-            template: `
+            async evaluate() {
+                const fx = this.expression;
+                const backendUrl = new URL(`${backendRootUrl}/evaluate`);
+
+                backendUrl.searchParams.append("expression", fx);
+                this.variables.forEach(variable => {
+                    backendUrl.searchParams.append(`Variables[${variable.name}]`, variable.value);
+                });
+                const requestUrl = backendUrl.href
+
+                try {
+                    const response = await axios.get(requestUrl);
+                    this.result = response.data.result;
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+        },
+        template: `
         <div class="form-group">
             <label class="form-group__label">Expression</label>
             <input class="form-group__field" type="text" v-model="expression">
@@ -83,42 +83,42 @@ layout: default
             <label>Result:</label>
             <div>{{result}}</div>
         </div>`
-        };
+    };
 
-        const ValidationComponent = {
-            data() {
-                return {
-                    expression: '',
-                    variables: [],
-                    isValid: null
-                }
+    const ValidationComponent = {
+        data() {
+            return {
+                expression: '',
+                variables: [],
+                isValid: null
+            }
+        },
+        methods: {
+            addVariable() {
+                this.variables.push({ name: "" });
             },
-            methods: {
-                addVariable() {
-                    this.variables.push({ name: "" });
-                },
-                deleteVariable(counter) {
-                    this.variables.splice(counter, 1);
-                },
-                async evaluate() {
-                    const fx = this.expression;
-                    const backendUrl = new URL(`${backendRootUrl}/validate`);
-
-                    backendUrl.searchParams.append("expression", fx);
-                    this.variables.forEach(variable => {
-                        backendUrl.searchParams.append(`Variables`, variable.name);
-                    });
-                    const requestUrl = backendUrl.href
-
-                    try {
-                        const response = await axios.get(requestUrl);
-                        this.isValid = response.data.success;
-                    } catch (error) {
-                        console.error(error);
-                    }
-                }
+            deleteVariable(counter) {
+                this.variables.splice(counter, 1);
             },
-            template: `
+            async evaluate() {
+                const fx = this.expression;
+                const backendUrl = new URL(`${backendRootUrl}/validate`);
+
+                backendUrl.searchParams.append("expression", fx);
+                this.variables.forEach(variable => {
+                    backendUrl.searchParams.append(`Variables`, variable.name);
+                });
+                const requestUrl = backendUrl.href
+
+                try {
+                    const response = await axios.get(requestUrl);
+                    this.isValid = response.data.success;
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+        },
+        template: `
         <div class="form-group">
             <label class="form-group__label">Expression</label>
             <input class="form-group__field" type="text" v-model="expression">
@@ -142,35 +142,32 @@ layout: default
             <label v-if='isValid===true' >The Expression is valid.</label>
             <label v-if='isValid===false' >The Expression is not valid.</label>            
         </div>`
-        };
+    };
 
-        const rootComponent = {
-            data() {
-                return {
-                    showEvaluator: true,
-                    showValidator: false,
-                }
+    const rootComponent = {
+        data() {
+            return {
+                showEvaluator: true,
+                showValidator: false,
+            }
+        },
+        methods: {
+            showEvaluatorOnly() {
+                this.showEvaluator = true;
+                this.showValidator = false;
             },
-            methods: {
-                showEvaluatorOnly() {
-                    this.showEvaluator = true;
-                    this.showValidator = false;
-                },
-                showValidatorOnly() {
-                    this.showEvaluator = false;
-                    this.showValidator = true;
-                }
+            showValidatorOnly() {
+                this.showEvaluator = false;
+                this.showValidator = true;
             }
         }
+    }
 
 
-        const { createApp } = Vue;
-        const app = createApp(rootComponent);
-        app
-            .component('evaluator', EvaluatorComponent)
-            .component('validation', ValidationComponent);
-        app.mount('#app')
-    </script>
-</body>
-
-</html>
+    const { createApp } = Vue;
+    const app = createApp(rootComponent);
+    app
+        .component('evaluator', EvaluatorComponent)
+        .component('validation', ValidationComponent);
+    app.mount('#app')
+</script>
