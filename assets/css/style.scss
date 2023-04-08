@@ -32,4 +32,10 @@ footer {
       border-color: rgba(255,255,255,0.3);
     }
   }
+
+  .container
+  {
+    display: flex;
+    justify-content: center;
+  }
 }

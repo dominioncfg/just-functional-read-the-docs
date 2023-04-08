@@ -52,7 +52,7 @@ const backendRootUrl = 'https://justfunctionalevaluator.azurewebsites.net/api/v2
             </div>
         </div>
         <div>
-            <button @click="evaluate">Calculate</button>
+            <a class='main-button' @click="evaluate">Calculate</a>
         </div>
         <div>
             <label>Result:</label>
@@ -75,7 +75,7 @@ const backendRootUrl = 'https://justfunctionalevaluator.azurewebsites.net/api/v2
             deleteVariable(counter) {
                 this.variables.splice(counter, 1);
             },
-            async evaluate() {
+            async validate() {
                 const fx = this.expression;
                 const backendUrl = new URL(`${backendRootUrl}/validate`);
 
@@ -111,7 +111,7 @@ const backendRootUrl = 'https://justfunctionalevaluator.azurewebsites.net/api/v2
             </div>
         </div>
         <div>
-            <button @click="evaluate">Validate</button>
+            <a class='main-button' @click="validate">Validate</a>
         </div>
         <div>
             <label v-if='isValid===true' >The Expression is valid.</label>
@@ -140,11 +140,13 @@ const backendRootUrl = 'https://justfunctionalevaluator.azurewebsites.net/api/v2
         <a class='main-button' @click="showEvaluatorOnly">Evaluation</a>
         <a class='main-button' @click="showValidatorOnly">Validation</a>
         <div>
-            <div v-if="showEvaluator">
-                <evaluator />
-            </div>
-            <div v-if="showValidator">
-                <validation />
+            <div class='container'>
+                <div v-if="showEvaluator">
+                    <evaluator />
+                </div>
+                <div v-if="showValidator">
+                    <validation />
+                </div>
             </div>
         </div>`
     };
