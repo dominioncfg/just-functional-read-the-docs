@@ -9,16 +9,7 @@ layout: default
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
  <div id="app">
-    <button @click="showEvaluatorOnly">Evaluation</button>
-    <button @click="showValidatorOnly">Validation</button>
-    <div>
-        <div v-if="showEvaluator">
-            <evaluator />
-        </div>
-        <div v-if="showValidator">
-            <validation />
-        </div>
-    </div>
+    
 </div>
 
 
@@ -160,8 +151,19 @@ layout: default
                 this.showEvaluator = false;
                 this.showValidator = true;
             }
-        }
-    }
+        },
+        template: `
+        <button @click="showEvaluatorOnly">Evaluation</button>
+        <button @click="showValidatorOnly">Validation</button>
+        <div>
+            <div v-if="showEvaluator">
+                <evaluator />
+            </div>
+            <div v-if="showValidator">
+                <validation />
+            </div>
+        </div>`
+    };
 
 
     const { createApp } = Vue;
