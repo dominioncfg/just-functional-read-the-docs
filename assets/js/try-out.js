@@ -137,7 +137,7 @@ const ValidationComponent = {
 
         <div class="form-result">
             <label v-if='isValid===true' class="success-message">The Expression is valid.</label>
-            <ulv-if='isValid===false' class="error-message">
+            <ul v-if='isValid===false' class="error-message">
                 <li v-for="(error, counter) in validationErrors" v-bind:key="counter">
                     <label>{{error}}</label>
                 </li>
