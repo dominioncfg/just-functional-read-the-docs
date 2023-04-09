@@ -30,9 +30,17 @@ const EvaluatorComponent = {
                 this.errorMessage = null;
                 const response = await axios.get(requestUrl);
                 this.result = response.data.result;
-            } catch (error) {
+            } catch (error) {                
                 this.result = null;
-                console.log(error);
+
+                if(error.response.status === 400)
+                {
+                    this.errorMessage = error.response.data.detail;
+                }
+                else
+                {
+                    this.errorMessage = "Ups! something went wrong!";
+                }
             }
         }
     },
