@@ -68,7 +68,8 @@ const ValidationComponent = {
         return {
             expression: '',
             variables: [],
-            isValid: null
+            isValid: null,
+            validationErrors:[]
         }
     },
     methods: {
@@ -89,10 +90,13 @@ const ValidationComponent = {
             const requestUrl = backendUrl.href
 
             try {
+                this.validationErrors = [];
                 const response = await axios.get(requestUrl);
                 this.isValid = response.data.success;
+                this.validationErrors = response.data.errors;
             } catch (error) {
                 this.isValid = false;
+                this.validationErrors = [];            
             }
         }
     },
@@ -120,7 +124,15 @@ const ValidationComponent = {
 
         <div class="form-result">
             <label v-if='isValid===true' class="success-message">The Expression is valid.</label>
-            <label v-if='isValid===false' class="error-message">The Expression is not valid.</label>            
+            <div v-if='isValid===false' class="error-message">
+                <label>The Expression is not valid due:</label>            
+                <ul>
+                    <li v-for="(error, counter) in validationErrors" v-bind:key="counter">
+                        <label>{{error}}</label>
+                    </li>
+                </ul>
+            </div>
+            
         </div>          
     </div>`
 };
