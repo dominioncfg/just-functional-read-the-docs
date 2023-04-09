@@ -4,7 +4,8 @@ const EvaluatorComponent = {
         return {
             expression: '',
             variables: [],
-            result: 0
+            result: null,
+            errorMessage: null,
         }
     },
     methods: {
@@ -25,10 +26,13 @@ const EvaluatorComponent = {
             const requestUrl = backendUrl.href
 
             try {
+                this.result = null;
+                this.errorMessage = null;
                 const response = await axios.get(requestUrl);
                 this.result = response.data.result;
             } catch (error) {
                 this.result = null;
+                console.log(error);
             }
         }
     },
@@ -57,8 +61,9 @@ const EvaluatorComponent = {
             <a class='main-button main-button--small' @click="evaluate">Calculate</a>
         </div>
         <div class="form-result">
-            <label>Result:</label>
-            <label>{{result}}</label>
+            <label v-if='!errorMessage'>Result:</label>
+            <label v-if='!errorMessage'>{{result}}</label>
+            <label v-if='errorMessage' class="error-message">{{errorMessage}}</label>
         </div>
     </div>`
 };
@@ -69,7 +74,7 @@ const ValidationComponent = {
             expression: '',
             variables: [],
             isValid: null,
-            validationErrors:[]
+            validationErrors: []
         }
     },
     methods: {
@@ -96,7 +101,7 @@ const ValidationComponent = {
                 this.validationErrors = response.data.errors;
             } catch (error) {
                 this.isValid = false;
-                this.validationErrors = [];            
+                this.validationErrors = ["Ups! something went wrong!"];
             }
         }
     },
@@ -124,15 +129,11 @@ const ValidationComponent = {
 
         <div class="form-result">
             <label v-if='isValid===true' class="success-message">The Expression is valid.</label>
-            <div v-if='isValid===false' class="error-message">
-                <label>The Expression is not valid due:</label>            
-                <ul>
-                    <li v-for="(error, counter) in validationErrors" v-bind:key="counter">
-                        <label>{{error}}</label>
-                    </li>
-                </ul>
-            </div>
-            
+            <ulv-if='isValid===false' class="error-message">
+                <li v-for="(error, counter) in validationErrors" v-bind:key="counter">
+                    <label>{{error}}</label>
+                </li>
+            </ul>            
         </div>          
     </div>`
 };
