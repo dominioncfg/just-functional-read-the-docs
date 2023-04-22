@@ -1,4 +1,4 @@
-const backendRootUrl = 'https://justfunctionalevaluator.azurewebsites.net/api/v2/math';
+const backendRootUrl = 'https://fap-justfunctional-evaluator-prod.azurewebsites.net//api/v2/math';
 const EvaluatorComponent = {
     data() {
         return {
